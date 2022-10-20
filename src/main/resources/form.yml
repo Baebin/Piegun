@@ -1,0 +1,29 @@
+name: §aTester
+item: Ghast_Tear
+
+damage: 8
+ammo: 10
+
+auto: false
+
+burst: 1
+spread: 1
+distance: 30
+
+knockback: 1.5
+
+delay_fire: 500
+delay_reload: 3000
+
+rx: 1.0
+ry: 1.0
+
+model_default: 1000
+model_zoom: 1001
+
+zoomEnabled: true
+zoomMotionEnabled: false
+
+sound_shoot: shot_sniper
+sound_reload: reload_default
+sound_empty: no_bullet

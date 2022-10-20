@@ -1,0 +1,16 @@
+name: Piegun
+version: '${version}'
+main: kr.piebin.piegun.Piegun
+api-version: 1.16
+authors: [ Piebin ]
+description: Custom Gun Plugin
+website: https://blog.naver.com/baebine
+
+commands:
+  Piegun:
+    aliases:
+      - gun
+      - pgun
+      - weapon
+    description:
+      - Custom Gun Plugin
