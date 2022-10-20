@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GunManager {
+public class GunUtilManager {
     public static Map<String, Gun> gunMap;
     public static final String FORM = "form.yml";
     public static final String SHIELD_NAME = "§b§b";
@@ -83,8 +83,8 @@ public class GunManager {
                 .setDelay_fire(yaml.getInt("delay_fire", 10))
                 .setDelay_reload(yaml.getInt("delay_reload", 0))
 
-                .setRx(yaml.getLong("rx", 0))
-                .setRy(yaml.getLong("ry", 0))
+                .setRx(Float.parseFloat(yaml.getString("rx", "0")))
+                .setRy(Float.parseFloat(yaml.getString("ry", "0")))
 
                 .setModel_default(yaml.getInt("model_default", 0))
                 .setModel_zoom(yaml.getInt("model_zoom", 0))

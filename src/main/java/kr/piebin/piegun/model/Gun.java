@@ -157,7 +157,6 @@ public class Gun {
     }
 
     public Gun setRy(float ry) {
-        if (ry < 5) ry = 5;
         this.ry = ry;
         return this;
     }

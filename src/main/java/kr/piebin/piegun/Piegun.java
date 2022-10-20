@@ -2,9 +2,13 @@ package kr.piebin.piegun;
 
 import kr.piebin.piegun.cmd.CmdPiegun;
 import kr.piebin.piegun.db.ConfigManager;
+import kr.piebin.piegun.listener.GunChangeListener;
 import kr.piebin.piegun.listener.GunFireListener;
+import kr.piebin.piegun.listener.GunReloadListener;
+import kr.piebin.piegun.listener.GunSwapListener;
 import kr.piebin.piegun.manager.GunFireManager;
-import kr.piebin.piegun.manager.GunManager;
+import kr.piebin.piegun.manager.GunUtilManager;
+import kr.piebin.piegun.manager.PacketManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,11 +33,15 @@ public final class Piegun extends JavaPlugin {
         ConfigManager.PATH = getDataFolder().getAbsolutePath() + "\\weapon";
 
         getCommand("Piegun").setExecutor(new CmdPiegun());
-        Bukkit.getPluginManager().registerEvents(new GunFireListener(), this);
 
-        GunManager.loadWeapons();
+        Bukkit.getPluginManager().registerEvents(new GunChangeListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GunFireListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GunReloadListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GunSwapListener(), this);
+
+        GunUtilManager.loadWeapons();
         try {
-            GunManager.createForm();
+            GunUtilManager.createForm();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,6 +54,9 @@ public final class Piegun extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+
+        PacketManager.ISSTOPPED = true;
+        GunFireManager.clear();
 
         log("Piegun Plugin Disabled.");
     }

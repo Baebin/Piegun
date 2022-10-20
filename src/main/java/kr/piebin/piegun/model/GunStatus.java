@@ -1,23 +1,47 @@
 package kr.piebin.piegun.model;
 
-import kr.piebin.piegun.manager.GunManager;
+import kr.piebin.piegun.manager.GunUtilManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class GunStatus {
-    Map<String, Boolean> fireStatusMap;
     Map<String, Integer> ammoMap;
-    Map<String, Boolean> zoomStatusMap;
     Map<String, Long> fireTimeMap;
+
+    Map<String, Boolean> fireStatusMap;
+    Map<String, Boolean> zoomStatusMap;
+    Map<String, Boolean> reloadStatusMap;
     Map<String, Boolean> actionBarStatusMap;
 
     public GunStatus() {
-        fireStatusMap = new HashMap<>();
         ammoMap = new HashMap<>();
-        zoomStatusMap = new HashMap<>();
         fireTimeMap = new HashMap<>();
+
+        fireStatusMap = new HashMap<>();
+        zoomStatusMap = new HashMap<>();
+        reloadStatusMap = new HashMap<>();
         actionBarStatusMap = new HashMap<>();
+    }
+
+    public int getAmmo(String gun) {
+        if (!ammoMap.containsKey(gun)) return GunUtilManager.gunMap.get(gun).getAmmo();
+        return ammoMap.get(gun);
+    }
+
+    public void setAmmo(String gun, int ammo) {
+        if (ammo < 0) ammo = 0;
+        if (ammo > GunUtilManager.gunMap.get(gun).getAmmo()) ammo = GunUtilManager.gunMap.get(gun).getAmmo();
+        this.ammoMap.put(gun, ammo);
+    }
+
+    public long getFireTime(String gun) {
+        if (!fireTimeMap.containsKey(gun)) return System.currentTimeMillis() - GunUtilManager.gunMap.get(gun).getDelay_fire();
+        return fireTimeMap.get(gun);
+    }
+
+    public void setFireTime(String gun, Long time) {
+        fireTimeMap.put(gun, time);
     }
 
     public boolean getFireStatus(String gun) {
@@ -29,33 +53,22 @@ public class GunStatus {
         fireStatusMap.put(gun, status);
     }
 
-    public int getAmmo(String gun) {
-        if (!ammoMap.containsKey(gun)) return GunManager.gunMap.get(gun).getAmmo();
-        return ammoMap.get(gun);
-    }
-
-    public void setAmmo(String gun, int ammo) {
-        if (ammo < 0) ammo = 0;
-        if (ammo > GunManager.gunMap.get(gun).getAmmo()) ammo = GunManager.gunMap.get(gun).getAmmo();
-        this.ammoMap.put(gun, ammo);
-    }
-
     public boolean getZoomStatus(String gun) {
         if (!zoomStatusMap.containsKey(gun)) return false;
         return zoomStatusMap.get(gun);
     }
 
+    public void setReloadStatus(String gun, boolean status) {
+        reloadStatusMap.put(gun, status);
+    }
+
+    public boolean getReloadStatus(String gun) {
+        if (!reloadStatusMap.containsKey(gun)) return false;
+        return reloadStatusMap.get(gun);
+    }
+
     public void setZoomStatusMap(String gun, boolean status) {
         zoomStatusMap.put(gun, status);
-    }
-
-    public long getFireTime(String gun) {
-        if (!fireTimeMap.containsKey(gun)) return System.currentTimeMillis() - GunManager.gunMap.get(gun).getDelay_fire();
-        return fireTimeMap.get(gun);
-    }
-
-    public void setFireTime(String gun, Long time) {
-        fireTimeMap.put(gun, time);
     }
 
     public boolean getActionBarStatus(String gun) {
