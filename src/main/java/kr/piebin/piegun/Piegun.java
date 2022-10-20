@@ -2,10 +2,7 @@ package kr.piebin.piegun;
 
 import kr.piebin.piegun.cmd.CmdPiegun;
 import kr.piebin.piegun.db.ConfigManager;
-import kr.piebin.piegun.listener.GunChangeListener;
-import kr.piebin.piegun.listener.GunFireListener;
-import kr.piebin.piegun.listener.GunReloadListener;
-import kr.piebin.piegun.listener.GunSwapListener;
+import kr.piebin.piegun.listener.*;
 import kr.piebin.piegun.manager.GunFireManager;
 import kr.piebin.piegun.manager.GunUtilManager;
 import kr.piebin.piegun.manager.PacketManager;
@@ -38,6 +35,7 @@ public final class Piegun extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GunFireListener(), this);
         Bukkit.getPluginManager().registerEvents(new GunReloadListener(), this);
         Bukkit.getPluginManager().registerEvents(new GunSwapListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GunZoomListener(), this);
 
         GunUtilManager.loadWeapons();
         try {

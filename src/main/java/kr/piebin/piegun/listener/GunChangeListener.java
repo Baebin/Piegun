@@ -3,6 +3,7 @@ package kr.piebin.piegun.listener;
 import kr.piebin.piegun.manager.GunFireManager;
 import kr.piebin.piegun.manager.GunUtilManager;
 import kr.piebin.piegun.manager.PacketManager;
+import kr.piebin.piegun.manager.PotionManager;
 import kr.piebin.piegun.model.Gun;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,6 +17,9 @@ public class GunChangeListener implements Listener {
     public void onChange(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
+
+        PotionManager.removeFastDigging(player);
+
         if (item != null && item.getType() != Material.AIR) {
             String weapon = item.getItemMeta().getDisplayName().toLowerCase();
 
@@ -24,6 +28,8 @@ public class GunChangeListener implements Listener {
 
                 if (item.getType().equals(GunUtilManager.getItem(weapon).getType())) {
                     PacketManager.showActionBar(player, weapon, item);
+
+                    PotionManager.addFastDigging(player);
 
                     if (item.getAmount() > 1) {
                         item.setAmount(1);

@@ -67,7 +67,7 @@ public class GunStatus {
         return reloadStatusMap.get(gun);
     }
 
-    public void setZoomStatusMap(String gun, boolean status) {
+    public void setZoomStatus(String gun, boolean status) {
         zoomStatusMap.put(gun, status);
     }
 
