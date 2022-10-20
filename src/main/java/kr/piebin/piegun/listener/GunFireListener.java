@@ -181,7 +181,7 @@ public class GunFireListener implements Listener {
 
     private void showBullet(Player player, String weapon) {
         Gun gun = GunManager.gunMap.get(weapon);
-        player.sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
                 "§c" + GunFireManager.getStatus(player).getAmmo(weapon) + " / " + gun.getAmmo()));
     }
 }
