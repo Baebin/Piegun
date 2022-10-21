@@ -20,6 +20,10 @@ public class SoundManager {
         player.stopSound(gun.getSound_reload());
     }
 
+    public static void playAutoChangedSound(Player player, Gun gun) {
+        playSound(player, gun.getSound_auto_changed());
+    }
+
     private static void playSound(Player player, String sound) {
         player.getWorld().playSound(player.getLocation(), sound, 1, 1);
     }

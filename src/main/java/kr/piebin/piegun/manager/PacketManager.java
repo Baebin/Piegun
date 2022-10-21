@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +23,27 @@ import java.util.Set;
 public class PacketManager {
     public static boolean ISSTOPPED = false;
     public static final int RELOAD_ACTIONBAR = 10;
+    public static final String[] BLOCKS_PASSABLE = {
+            "pot", "web", "bush", "lava", "rale", "sign", "step", "water",
+            "diode", "leave", "lever", "plant", "plate", "sugar", "torch",
+            "button", "carpet", "flower", "ladder",
+            "redstone", "sapling", "mushroom",
+            "dandelion", "trap_door", "long_grass"
+    };
+
+    public static boolean isPassable(Block block) {
+        String type = block.getType().toString().toLowerCase();
+
+        Material material = Material.matchMaterial(type);
+        if (material.isAir()) return true;
+
+        for (String block_passable: BLOCKS_PASSABLE) {
+            if (type.toLowerCase().contains(block_passable)) return true;
+        }
+        if (material.isSolid()) return false;
+
+        return false;
+    }
 
     public static void sendPacketPlayOutPosition(Player player, float yaw, Float pitch) {
         Set<PacketPlayOutPosition.EnumPlayerTeleportFlags> flagsSet = new HashSet<>(
@@ -36,9 +58,9 @@ public class PacketManager {
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
 
-    public static void spawnCrit(Location location) {
+    public static void spawnParticle(Location location, String particle) {
         location.getWorld().spawnParticle(
-                Particle.CRIT, location.getX(), location.getY(), location.getZ(), 1, 0, 0, 0, 0, null);
+                Particle.valueOf(particle), location.getX(), location.getY(), location.getZ(), 1, 0, 0, 0, 0, null);
     }
 
     public static void sendActionBar(Player player, String message) {

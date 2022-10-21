@@ -15,8 +15,8 @@ import java.util.Map;
 public class GunUtilManager {
     public static Map<String, Gun> gunMap;
     public static final String FORM = "form.yml";
-    public static final String SHIELD_NAME = "§b§b";
-    public static final int SHIELD_CODE = 1000;
+    public static final String SECRET_NAME = "§b§b";
+    public static final int SECRET_CODE = 1000;
 
     public static ItemStack getItem(String weapon) {
         Gun gun = gunMap.get(weapon);
@@ -33,8 +33,8 @@ public class GunUtilManager {
     public static ItemStack getShieldItem() {
         ItemStack item = new ItemStack(Material.SHIELD);
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(SHIELD_NAME);
-        itemMeta.setCustomModelData(SHIELD_CODE);
+        itemMeta.setDisplayName(SECRET_NAME);
+        itemMeta.setCustomModelData(SECRET_CODE);
         item.setItemMeta(itemMeta);
 
         return item;
@@ -42,7 +42,25 @@ public class GunUtilManager {
 
     public static boolean checkShieldItem(ItemStack item) {
         ItemMeta itemMeta = item.getItemMeta();
-        if (item.getType() == Material.SHIELD && itemMeta.getCustomModelData() == SHIELD_CODE) {
+        if (item.getType() == Material.SHIELD && itemMeta.getCustomModelData() == SECRET_CODE) {
+            return true;
+        }
+        return false;
+    }
+
+    public static ItemStack getPunpkinItem() {
+        ItemStack item = new ItemStack(Material.CARVED_PUMPKIN);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(SECRET_NAME);
+        itemMeta.setCustomModelData(SECRET_CODE);
+        item.setItemMeta(itemMeta);
+
+        return item;
+    }
+
+    public static boolean checkPumpkinItem(ItemStack item) {
+        ItemMeta itemMeta = item.getItemMeta();
+        if (item.getType() == Material.CARVED_PUMPKIN && itemMeta.getCustomModelData() == SECRET_CODE) {
             return true;
         }
         return false;
@@ -94,7 +112,8 @@ public class GunUtilManager {
 
                 .setSound_shoot(yaml.getString("sound_shoot", ""))
                 .setSound_reload(yaml.getString("sound_reload", ""))
-                .setSound_empty(yaml.getString("sound_empty", ""));
+                .setSound_empty(yaml.getString("sound_empty", ""))
+                .setSound_auto_changed(yaml.getString("sound_auto_changed", "block.note_block.hat"));
 
             gunMap.put(gun.getName().toLowerCase(), gun);
             Piegun.log("Weapon Loaded - " + gun.getName());

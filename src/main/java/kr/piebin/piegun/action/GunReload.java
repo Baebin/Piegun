@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class GunReload {
     private GunStatus status;
@@ -92,14 +91,11 @@ public class GunReload {
 
                 PacketManager.sendActionBar(player, actionbar);
             }
-
-            boolean action_clear = true;
             if ((status=GunFireManager.getStatus(player)).getReloadStatus(weapon)) {
                 status.setReloadStatus(weapon, false);
                 status.setAmmo(weapon, gun.getAmmo());
                 GunFireManager.saveStatus(player, status);
 
-                action_clear = false;
                 PacketManager.sendActionBar(player, actionbar.replaceAll("f", "b"));
             } else {
                 SoundManager.stopReloadSound(player, gun);
@@ -121,6 +117,7 @@ public class GunReload {
         ItemStack item_new = player.getItemInHand();
         if (item_new == null || item_new.getType() == Material.AIR) stopReload();
         if (item_new.getType() != item.getType()) stopReload();
+        if (item_new.getItemMeta() == null) stopReload();
         if (!item_new.getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName())) stopReload();
     }
 

@@ -35,6 +35,7 @@ public class Gun {
     String sound_shoot;
     String sound_reload;
     String sound_empty;
+    String sound_auto_changed;
 
     public String getName() {
         return name;
@@ -223,6 +224,15 @@ public class Gun {
 
     public Gun setSound_empty(String sound_empty) {
         this.sound_empty = sound_empty;
+        return this;
+    }
+
+    public String getSound_auto_changed() {
+        return sound_auto_changed;
+    }
+
+    public Gun setSound_auto_changed(String sound_auto_changed) {
+        this.sound_auto_changed = sound_auto_changed;
         return this;
     }
 }

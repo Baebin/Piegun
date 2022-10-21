@@ -27,3 +27,4 @@ zoomMotionEnabled: false
 sound_shoot: shot_sniper
 sound_reload: reload_default
 sound_empty: no_bullet
+sound_auto_changed: block.note_block.hat

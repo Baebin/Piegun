@@ -10,6 +10,7 @@ public class GunStatus {
     Map<String, Long> fireTimeMap;
 
     Map<String, Boolean> fireStatusMap;
+    Map<String, Boolean> autoStatusMap;
     Map<String, Boolean> zoomStatusMap;
     Map<String, Boolean> reloadStatusMap;
     Map<String, Boolean> actionBarStatusMap;
@@ -19,6 +20,7 @@ public class GunStatus {
         fireTimeMap = new HashMap<>();
 
         fireStatusMap = new HashMap<>();
+        autoStatusMap = new HashMap<>();
         zoomStatusMap = new HashMap<>();
         reloadStatusMap = new HashMap<>();
         actionBarStatusMap = new HashMap<>();
@@ -51,6 +53,17 @@ public class GunStatus {
 
     public void setFireStatus(String gun, boolean status) {
         fireStatusMap.put(gun, status);
+    }
+
+    public boolean getAutoStatus(String gun) {
+        if (!autoStatusMap.containsKey(gun)) {
+            return GunUtilManager.gunMap.get(gun).isAuto();
+        }
+        return autoStatusMap.get(gun);
+    }
+
+    public void setAutoStatus(String gun, boolean status) {
+        autoStatusMap.put(gun, status);
     }
 
     public boolean getZoomStatus(String gun) {

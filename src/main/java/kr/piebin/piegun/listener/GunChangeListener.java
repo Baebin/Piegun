@@ -1,5 +1,6 @@
 package kr.piebin.piegun.listener;
 
+import kr.piebin.piegun.action.GunZoom;
 import kr.piebin.piegun.manager.GunFireManager;
 import kr.piebin.piegun.manager.GunUtilManager;
 import kr.piebin.piegun.manager.PacketManager;
@@ -17,8 +18,27 @@ public class GunChangeListener implements Listener {
     public void onChange(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
+        ItemStack item_pre = player.getInventory().getItem(event.getPreviousSlot());
 
+        PotionManager.removeSlow(player);
         PotionManager.removeFastDigging(player);
+
+        ItemStack item_helmet = player.getInventory().getHelmet();
+        if (item_helmet != null && item_helmet.getType() != Material.AIR) {
+            if (GunUtilManager.checkPumpkinItem(item_helmet)) {
+                player.getInventory().setHelmet(new ItemStack(Material.AIR));
+            }
+        }
+
+        if (item_pre != null && item_pre.getType() != Material.AIR) {
+            String weapon = item_pre.getItemMeta().getDisplayName().toLowerCase();
+
+            if (GunUtilManager.gunMap.containsKey(weapon)) {
+                if (GunFireManager.getStatus(player).getZoomStatus(weapon)) {
+                    player.getInventory().setItem(event.getPreviousSlot(), new GunZoom(player, item_pre, weapon).setZoom(false).getItem());
+                }
+            }
+        }
 
         if (item != null && item.getType() != Material.AIR) {
             String weapon = item.getItemMeta().getDisplayName().toLowerCase();
@@ -36,7 +56,7 @@ public class GunChangeListener implements Listener {
                         player.getInventory().setItem(event.getNewSlot(), item);
                     }
 
-                    if (!gun.isAuto()) {
+                    if (!gun.isAuto() || !GunFireManager.getStatus(player).getAutoStatus(weapon)) {
                         player.getInventory().setItemInOffHand(GunUtilManager.getShieldItem());
                         return;
                     }
