@@ -130,7 +130,7 @@ public class GunFire {
     private void fireProjectile(Location location, int burst) {
         if (burst == 1) {
             rebound();
-            fireProjectile(location);
+            fireProjectileSpread(location);
             return;
         }
 
@@ -138,8 +138,10 @@ public class GunFire {
             Location location_new = location;
 
             for (int i = 0; i < burst; i++) {
-                fireProjectile(location_new);
-                location_new = rebound(location_new);
+                fireProjectileSpread(location_new);
+                location_new = rebound(new Location(
+                        location.getWorld(), location.getX(), location.getY(), location.getZ(),
+                        location.getYaw(), location.getPitch()));
 
                 try {
                     Thread.sleep(80);
@@ -148,6 +150,28 @@ public class GunFire {
                 }
             }
         });
+    }
+
+    private void fireProjectileSpread(Location location) {
+        if (spread > 1) {
+            float yaw;
+            float pitch;
+
+            int multiply = -1;
+
+            Random random = new Random();
+            for (int i = 0; i < spread; i++) {
+                if (random.nextInt(2) == 0) multiply *= -1;
+                yaw = location.getYaw() + (random.nextInt(30) + 1) * multiply;
+
+                if (random.nextInt(2) == 0) multiply *= -1;
+                pitch = location.getPitch() - (random.nextInt(30) + 1) * multiply;
+
+                fireProjectile(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch));
+            }
+        } else {
+            fireProjectile(location);
+        }
     }
 
     private void fireProjectile(Location location) {
