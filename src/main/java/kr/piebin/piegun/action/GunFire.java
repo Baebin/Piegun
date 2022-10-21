@@ -195,6 +195,7 @@ public class GunFire {
             if (random.nextInt(2) == 0) multiply *= -1;
             location.setPitch(location.getPitch() + (random.nextInt(15) + 1) * multiply);
         }
+
         Vector vector = location.getDirection();
 
         double x = vector.getX() * distancePerBlock;
