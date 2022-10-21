@@ -1,4 +1,4 @@
-package kr.piebin.piegun.db;
+package kr.piebin.piegun.database;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 

@@ -1,7 +1,7 @@
 package kr.piebin.piegun;
 
 import kr.piebin.piegun.cmd.CmdPiegun;
-import kr.piebin.piegun.db.ConfigManager;
+import kr.piebin.piegun.database.ConfigManager;
 import kr.piebin.piegun.listener.*;
 import kr.piebin.piegun.manager.GunFireManager;
 import kr.piebin.piegun.manager.GunUtilManager;

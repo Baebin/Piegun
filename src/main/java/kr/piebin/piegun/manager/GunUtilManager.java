@@ -1,7 +1,7 @@
 package kr.piebin.piegun.manager;
 
 import kr.piebin.piegun.Piegun;
-import kr.piebin.piegun.db.ConfigManager;
+import kr.piebin.piegun.database.ConfigManager;
 import kr.piebin.piegun.model.Gun;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
