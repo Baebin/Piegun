@@ -169,7 +169,7 @@ public class Gun {
         return particle;
     }
 
-    public Gun setParticle(String name) {
+    public Gun setParticle(String particle) {
         this.particle = particle;
         return this;
     }
