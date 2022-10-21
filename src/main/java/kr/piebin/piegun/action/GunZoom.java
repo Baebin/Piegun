@@ -56,12 +56,12 @@ public class GunZoom {
                     }
                 }
             }
-            return this;
+        } else if (mode) {
+            PotionManager.addSlow(player);
         }
 
         if (mode) {
             meta.setCustomModelData(gun.getModel_zoom());
-            PotionManager.addSlow(player);
         } else {
             meta.setCustomModelData(gun.getModel_default());
         }

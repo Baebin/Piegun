@@ -18,6 +18,8 @@ delay_reload: 3000
 rx: 1.0
 ry: 1.0
 
+particle: CRIT_MAGIC
+
 model_default: 1000
 model_zoom: 1001
 

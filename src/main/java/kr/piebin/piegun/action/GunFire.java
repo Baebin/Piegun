@@ -32,6 +32,8 @@ public class GunFire {
     float distance = 0;
     float knockback = 0;
 
+    String particle;
+
     Gun gun;
     GunStatus status;
 
@@ -80,6 +82,8 @@ public class GunFire {
             damage = gun.getDamage();
             distance = gun.getDistance();
             knockback = gun.getKnockback();
+
+            particle = gun.getParticle();
 
             int delay_fire = gun.getDelay_fire();
             long start_time = System.currentTimeMillis();
@@ -195,7 +199,7 @@ public class GunFire {
 
                 if (ISSTOPPED.get(index)) return;
                 if (i++ > 2) {
-                    PacketManager.spawnParticle(location, "CRIT_MAGIC");
+                    PacketManager.spawnParticle(location, particle);
                 }
 
                 if (!PacketManager.isPassable(location.getBlock())) return;

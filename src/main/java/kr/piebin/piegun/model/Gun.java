@@ -23,6 +23,9 @@ public class Gun {
     float rx;
     float ry;
 
+    // Particle;
+    String particle;
+
     // Resource
     int model_default;
     int model_zoom;
@@ -159,6 +162,15 @@ public class Gun {
 
     public Gun setRy(float ry) {
         this.ry = ry;
+        return this;
+    }
+
+    public String getParticle() {
+        return particle;
+    }
+
+    public Gun setParticle(String name) {
+        this.particle = particle;
         return this;
     }
 
