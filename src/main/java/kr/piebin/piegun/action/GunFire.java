@@ -190,10 +190,10 @@ public class GunFire {
             int multiply = -1;
 
             if (random.nextInt(2) == 0) multiply *= -1;
-            location.setYaw(location.getYaw() + (random.nextInt(30) + 1) * multiply);
+            location.setYaw(location.getYaw() + (random.nextInt(15) + 1) * multiply);
 
             if (random.nextInt(2) == 0) multiply *= -1;
-            location.setPitch(location.getPitch() + (random.nextInt(30) + 1) * multiply);
+            location.setPitch(location.getPitch() + (random.nextInt(15) + 1) * multiply);
         }
         Vector vector = location.getDirection();
 
