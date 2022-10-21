@@ -183,6 +183,18 @@ public class GunFire {
 
         Location location_pre = location.getBlock().getLocation();
 
+        // Sniper
+        if (gun.isZoomMotionEnabled() && !status.getZoomStatus(weapon)) {
+            Random random = new Random();
+
+            int multiply = -1;
+
+            if (random.nextInt(2) == 0) multiply *= -1;
+            location.setYaw(location.getYaw() + (random.nextInt(30) + 1) * multiply);
+
+            if (random.nextInt(2) == 0) multiply *= -1;
+            location.setPitch(location.getPitch() + (random.nextInt(30) + 1) * multiply);
+        }
         Vector vector = location.getDirection();
 
         double x = vector.getX() * distancePerBlock;
