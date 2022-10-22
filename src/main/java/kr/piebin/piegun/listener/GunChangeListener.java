@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class GunChangeListener implements Listener {
     @EventHandler
@@ -34,8 +35,16 @@ public class GunChangeListener implements Listener {
             String weapon = item_pre.getItemMeta().getDisplayName().toLowerCase();
 
             if (GunUtilManager.gunMap.containsKey(weapon)) {
+                Gun gun = GunUtilManager.gunMap.get(weapon);
+
                 if (GunFireManager.getStatus(player).getZoomStatus(weapon)) {
                     player.getInventory().setItem(event.getPreviousSlot(), new GunZoom(player, item_pre, weapon).setZoom(false).getItem());
+                }
+
+                if (item_pre.getItemMeta().getCustomModelData() != gun.getModel_default()) {
+                    ItemMeta meta = item_pre.getItemMeta();
+                    meta.setCustomModelData(gun.getModel_default());
+                    item_pre.setItemMeta(meta);
                 }
             }
         }
@@ -53,7 +62,6 @@ public class GunChangeListener implements Listener {
 
                     if (item.getAmount() > 1) {
                         item.setAmount(1);
-                        player.getInventory().setItem(event.getNewSlot(), item);
                     }
 
                     if (!gun.isAuto() || !GunFireManager.getStatus(player).getAutoStatus(weapon)) {

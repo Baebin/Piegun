@@ -1,7 +1,6 @@
 name: Piegun
 version: '${version}'
 main: kr.piebin.piegun.Piegun
-depend: [Skript]
 api-version: 1.16
 authors: [ Piebin ]
 description: Custom Gun Plugin

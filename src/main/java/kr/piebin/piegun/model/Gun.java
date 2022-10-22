@@ -1,5 +1,8 @@
 package kr.piebin.piegun.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Gun {
     String name;
     String item;
@@ -29,6 +32,7 @@ public class Gun {
     // Resource
     int model_default;
     int model_zoom;
+    List<Integer> model_reload;
 
     // Sniper zoom
     boolean zoomEnabled;
@@ -191,6 +195,16 @@ public class Gun {
     public Gun setModel_zoom(int model_zoom) {
         if (model_zoom < 0) model_zoom = 0;
         this.model_zoom = model_zoom;
+        return this;
+    }
+
+    public List<Integer> getModel_reload() {
+        if (model_reload == null) return new ArrayList<>();
+        return model_reload;
+    }
+
+    public Gun setModel_reload(List<Integer> model_reload) {
+        this.model_reload = model_reload;
         return this;
     }
 

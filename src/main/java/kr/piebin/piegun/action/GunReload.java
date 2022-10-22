@@ -7,13 +7,19 @@ import kr.piebin.piegun.manager.PacketManager;
 import kr.piebin.piegun.manager.SoundManager;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
+import net.minecraft.server.v1_16_R3.PacketPlayOutSetSlot;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 public class GunReload {
-    private GunStatus status;
+    GunStatus status;
 
     Player player;
     ItemStack item;
@@ -52,12 +58,16 @@ public class GunReload {
 
             int count = 0, count_last = 0;
 
+            int model_index = -1;
+            List<Integer> model_reload = gun.getModel_reload();
+
             String actionbar = null;
             String[] colors = new String[PacketManager.RELOAD_ACTIONBAR];
             for (int i = 0; i < colors.length; i++) {
                 colors[i] = "§f―";
             }
 
+            ItemMeta meta = item.getItemMeta();
             while (System.currentTimeMillis() - time <= delay_reload) {
                 try {
                     Thread.sleep(20);
@@ -73,7 +83,18 @@ public class GunReload {
 
                 if (!status.getReloadStatus(weapon)) {
                     break;
-                };
+                }
+
+                if (model_reload.size() > 0 && model_index < model_reload.size()-1) {
+                    if (model_index < Math.floor((System.currentTimeMillis() - time)/(delay_reload/model_reload.size()))) {
+                        model_index = (int) Math.floor((System.currentTimeMillis() - time)/(delay_reload/model_reload.size()));
+
+                        //PacketManager.sendPacketPlayOutSetSlot(player, weapon, model_reload.get(model_index));
+                        meta.setCustomModelData(model_reload.get(model_index));
+                        item.setItemMeta(meta);
+                        player.setItemInHand(item);
+                    }
+                }
 
                 if (count_last <= Math.floor((System.currentTimeMillis() - time)/(delay_reload/colors.length))) {
                     for (int i = count_last; i < count; i++) {
@@ -92,6 +113,11 @@ public class GunReload {
                 PacketManager.sendActionBar(player, actionbar);
             }
             if ((status=GunFireManager.getStatus(player)).getReloadStatus(weapon)) {
+                //PacketManager.sendPacketPlayOutSetSlot(player, weapon, gun.getModel_default());
+                meta.setCustomModelData(gun.getModel_default());
+                item.setItemMeta(meta);
+                player.setItemInHand(item);
+
                 status.setReloadStatus(weapon, false);
                 status.setAmmo(weapon, gun.getAmmo());
                 GunFireManager.saveStatus(player, status);
@@ -100,6 +126,16 @@ public class GunReload {
             } else {
                 SoundManager.stopReloadSound(player, gun);
                 PacketManager.sendActionBar(player, "");
+            }
+
+            if (player.getItemInHand() != null && player.getItemInHand().getType() != Material.AIR) {
+                if (player.getItemInHand().getType() == item.getType()
+                        && player.getItemInHand().getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName())) {
+
+                    meta.setCustomModelData(gun.getModel_default());
+                    item.setItemMeta(meta);
+                    player.setItemInHand(item);
+                }
             }
 
             init();

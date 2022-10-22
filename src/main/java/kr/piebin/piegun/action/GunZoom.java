@@ -2,6 +2,7 @@ package kr.piebin.piegun.action;
 
 import kr.piebin.piegun.manager.GunFireManager;
 import kr.piebin.piegun.manager.GunUtilManager;
+import kr.piebin.piegun.manager.PacketManager;
 import kr.piebin.piegun.manager.PotionManager;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;

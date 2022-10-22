@@ -6,10 +6,15 @@ import kr.piebin.piegun.cmd.CmdPiegun;
 import kr.piebin.piegun.database.ConfigManager;
 import kr.piebin.piegun.listener.*;
 import kr.piebin.piegun.manager.GunFireManager;
+import kr.piebin.piegun.manager.GunTeamManager;
 import kr.piebin.piegun.manager.GunUtilManager;
 import kr.piebin.piegun.manager.PacketManager;
-import kr.piebin.piegun.skript.expression.GunCacheClear;
+import kr.piebin.piegun.skript.effect.GunCacheClear;
+import kr.piebin.piegun.skript.effect.GunTeamClear;
+import kr.piebin.piegun.skript.effect.GunTeamSet;
 import kr.piebin.piegun.skript.expression.GunItem;
+import kr.piebin.piegun.skript.expression.GunTeamCheck;
+import kr.piebin.piegun.skript.expression.GunTeamGet;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,6 +49,8 @@ public final class Piegun extends JavaPlugin {
         }
 
         GunFireManager.clear();
+
+        GunTeamManager.init();
 
         registerEvents();
         registerSkript();
@@ -81,8 +88,14 @@ public final class Piegun extends JavaPlugin {
         }
 
         Skript.registerAddon(this);
-        Skript.registerEffect(GunCacheClear.class, new String[] { "clear gun cache of %player%" });
-        Skript.registerExpression(GunItem.class, ItemStack.class, ExpressionType.PROPERTY, new String[] { "gun of %string%" });
+        Skript.registerEffect(GunCacheClear.class, new String[] { "(clear|clean|delete) gun cache of %player%" });
+        Skript.registerEffect(GunTeamClear.class, new String[] { "(clear|delete) gun team of %player%" });
+        Skript.registerEffect(GunTeamSet.class, new String[] { "(set|change) gun team of %player% to %string%" });
+
+        Skript.registerExpression(GunItem.class, ItemStack.class, ExpressionType.PROPERTY, new String[] { "gun %string%" });
+        Skript.registerExpression(GunTeamCheck.class, Boolean.class, ExpressionType.PROPERTY, new String[] { "gun team check %player% and %player%" });
+        Skript.registerExpression(GunTeamGet.class, String.class, ExpressionType.PROPERTY, new String[] { "%player%'s gun team", "gun team of %player%" });
+
         log("Skript Syntax Added.");
     }
 }

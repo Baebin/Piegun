@@ -6,12 +6,14 @@ import kr.piebin.piegun.model.GunStatus;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.server.v1_16_R3.PacketPlayOutPosition;
+import net.minecraft.server.v1_16_R3.PacketPlayOutSetSlot;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -43,6 +45,21 @@ public class PacketManager {
         if (material.isSolid()) return false;
 
         return false;
+    }
+
+    public static void sendPacketPlayOutSetSlot(Player player, ItemStack item) {
+        ((CraftPlayer)player).getHandle().playerConnection.
+                sendPacket(new PacketPlayOutSetSlot(0, 36 + player.getInventory().getHeldItemSlot(), CraftItemStack.asNMSCopy(item)));
+    }
+
+    public static void sendPacketPlayOutSetSlot(Player player, String weapon, int model) {
+        ItemStack item = GunUtilManager.getItem(weapon);
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setCustomModelData(model);
+        item.setItemMeta(meta);
+
+        sendPacketPlayOutSetSlot(player, item);
     }
 
     public static void sendPacketPlayOutPosition(Player player, float yaw, Float pitch) {

@@ -22,6 +22,8 @@ particle: CRIT_MAGIC
 
 model_default: 1000
 model_zoom: 1001
+model_reload:
+- 1002
 
 zoomEnabled: true
 zoomMotionEnabled: false

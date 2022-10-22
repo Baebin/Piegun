@@ -1,4 +1,4 @@
-package kr.piebin.piegun.skript.expression;
+package kr.piebin.piegun.skript.effect;
 
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;

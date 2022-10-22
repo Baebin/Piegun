@@ -3,6 +3,7 @@ package kr.piebin.piegun.listener;
 import kr.piebin.piegun.action.GunZoom;
 import kr.piebin.piegun.manager.GunFireManager;
 import kr.piebin.piegun.manager.GunUtilManager;
+import kr.piebin.piegun.manager.PacketManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

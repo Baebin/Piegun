@@ -1,10 +1,7 @@
 package kr.piebin.piegun.action;
 
 import kr.piebin.piegun.Piegun;
-import kr.piebin.piegun.manager.GunFireManager;
-import kr.piebin.piegun.manager.GunUtilManager;
-import kr.piebin.piegun.manager.PacketManager;
-import kr.piebin.piegun.manager.SoundManager;
+import kr.piebin.piegun.manager.*;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
 import org.bukkit.Bukkit;
@@ -228,24 +225,39 @@ public class GunFire {
                 if (ISSTOPPED.get(index)) return;
 
                 if (e instanceof LivingEntity && e != player) {
-                    double health = ((LivingEntity) e).getHealth() - damage;
-                    if (health <= 0) {
-                        ((LivingEntity) e).damage(100000, player);
+                    if (e instanceof Player) {
+                        if (!GunTeamManager.checkTeam((Player) e, player)) {
+                            attack((LivingEntity) e, index);
+                        }
                     } else {
-                        ((LivingEntity) e).setHealth(health);
-                        ((LivingEntity) e).damage(0, player);
+                        attack((LivingEntity) e, index);
+                        return;
                     }
-
-                    Vector vector_knockback = player.getLocation().getDirection();
-                    vector_knockback.multiply(knockback);
-
-                    e.setVelocity(vector_knockback);
-
-                    ISSTOPPED.set(index, true);
-                    return;
                 }
             }
         });
+    }
+
+    private void attack(LivingEntity e, int index) {
+        Vector vector_knockback = player.getLocation().getDirection();
+        vector_knockback.multiply(knockback);
+
+        e.setVelocity(vector_knockback);
+
+        ISSTOPPED.set(index, true);
+
+        damage(e);
+    }
+
+    private void damage(LivingEntity e) {
+        double health = e.getHealth() - damage;
+        if (health <= 0) {
+            e.damage(100000, player);
+            return;
+        }
+
+        e.setHealth(health);
+        e.damage(0, player);
     }
 
     private void rebound() {

@@ -9,7 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GunUtilManager {
@@ -108,6 +110,7 @@ public class GunUtilManager {
 
                 .setModel_default(yaml.getInt("model_default", 0))
                 .setModel_zoom(yaml.getInt("model_zoom", 0))
+                .setModel_reload(yaml.getIntegerList("model_reload"))
 
                 .setZoomEnabled(yaml.getBoolean("zoomEnabled", true))
                 .setZoomMotionEnabled(yaml.getBoolean("zoomMotionEnabled", false))
@@ -134,7 +137,7 @@ public class GunUtilManager {
         final OutputStream fos = new FileOutputStream(file);
         final byte[] buffer = new byte[4096];
 
-        int len = 0;
+        int len;
         while ((len = is.read(buffer)) > 0) {
             fos.write(buffer, 0, len);
         }
