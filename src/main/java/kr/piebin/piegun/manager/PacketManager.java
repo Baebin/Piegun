@@ -27,10 +27,13 @@ public class PacketManager {
     public static final int RELOAD_ACTIONBAR = 10;
     public static final String[] BLOCKS_PASSABLE = {
             "pot", "web", "bush", "lava", "rale", "sign", "step", "water",
-            "diode", "leave", "lever", "plant", "plate", "sugar", "torch",
+            "diode", "glass", "leave", "lever", "plant", "plate", "sugar", "torch",
             "button", "carpet", "flower", "ladder",
             "redstone", "sapling", "mushroom",
-            "dandelion", "trap_door", "long_grass"
+            "dandelion", "trap_door", "tall_grass"
+    };
+    public static final String[] BLOCKS_PASSABLE_ = {
+            "grass"
     };
 
     public static boolean isPassable(Block block) {
@@ -39,6 +42,9 @@ public class PacketManager {
         Material material = Material.matchMaterial(type);
         if (material.isAir()) return true;
 
+        for (String block_passable: BLOCKS_PASSABLE_) {
+            if (type.toLowerCase().equals(block_passable)) return true;
+        }
         for (String block_passable: BLOCKS_PASSABLE) {
             if (type.toLowerCase().contains(block_passable)) return true;
         }

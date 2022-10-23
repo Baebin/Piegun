@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class GunFire {
     final int delay = 220;
-    final float distancePerBlock = 0.5f;
+    final float distancePerBlock = 0.4f;
 
     List<Boolean> ISSTOPPED = new ArrayList<>();
     boolean isAuto;
@@ -214,23 +214,25 @@ public class GunFire {
 
                 if (!PacketManager.isPassable(location.getBlock())) return;
 
-                checkEntityAndAttack(location.getBlock().getLocation(), index);
+                checkEntityAndAttack(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), 0, 0), index);
             }
         });
     }
 
     private void checkEntityAndAttack(Location location, int index) {
         Bukkit.getScheduler().runTask(Piegun.getInstance(), () -> {
-            for (Entity e : location.getWorld().getNearbyEntities(location ,0.3, 0.3, 0.3)) {
+            for (Entity e : location.getWorld().getNearbyEntities(location ,0.2, 0.2, 0.2)) {
                 if (ISSTOPPED.get(index)) return;
 
                 if (e instanceof LivingEntity && e != player) {
+                    boolean isHeadshot = false;
+                    if (((LivingEntity) e).getEyeLocation().distance(location) <= 0.5) isHeadshot = true;
                     if (e instanceof Player) {
                         if (!GunTeamManager.checkTeam((Player) e, player)) {
-                            attack((LivingEntity) e, index);
+                            attack((LivingEntity) e, index, isHeadshot);
                         }
                     } else {
-                        attack((LivingEntity) e, index);
+                        attack((LivingEntity) e, index, isHeadshot);
                         return;
                     }
                 }
@@ -238,7 +240,7 @@ public class GunFire {
         });
     }
 
-    private void attack(LivingEntity e, int index) {
+    private void attack(LivingEntity e, int index, boolean isHeadshot) {
         Vector vector_knockback = player.getLocation().getDirection();
         vector_knockback.multiply(knockback);
 
@@ -246,11 +248,17 @@ public class GunFire {
 
         ISSTOPPED.set(index, true);
 
-        damage(e);
+        damage(e, isHeadshot);
     }
 
-    private void damage(LivingEntity e) {
+    private void damage(LivingEntity e, boolean isHeadshot) {
         double health = e.getHealth() - damage;
+        if (isHeadshot) {
+            health -= damage;
+            SoundManager.playHitSound(player, gun);
+        } else {
+            SoundManager.playHeadshotSound(player, gun);
+        }
         if (health <= 0) {
             e.damage(100000, player);
             return;

@@ -9,9 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GunUtilManager {
@@ -89,7 +87,7 @@ public class GunUtilManager {
             gun.setName(yaml.getString("name", ""))
                 .setItem(yaml.getString("item", "Ghast_Tear"))
 
-                .setDamage(yaml.getLong("damage", 0))
+                .setDamage(Float.parseFloat(yaml.getString("damage", "0")))
                 .setAmmo(yaml.getInt("ammo", 0))
 
                 .setAuto(yaml.getBoolean("auto", false))
@@ -98,7 +96,7 @@ public class GunUtilManager {
                 .setSpread(yaml.getInt("spread", 1))
                 .setDistance(yaml.getInt("distance", 1))
 
-                .setKnockback(yaml.getLong("knockback", 0))
+                .setKnockback(Float.parseFloat(yaml.getString("knockback", "0")))
 
                 .setDelay_fire(yaml.getInt("delay_fire", 10))
                 .setDelay_reload(yaml.getInt("delay_reload", 0))
@@ -118,7 +116,10 @@ public class GunUtilManager {
                 .setSound_shoot(yaml.getString("sound_shoot", ""))
                 .setSound_reload(yaml.getString("sound_reload", ""))
                 .setSound_empty(yaml.getString("sound_empty", ""))
-                .setSound_auto_changed(yaml.getString("sound_auto_changed", "block.note_block.hat"));
+                .setSound_auto_changed(yaml.getString("sound_auto_changed", "block.note_block.hat"))
+
+                .setSound_hit(yaml.getString("sound_hit", ""))
+                .setSound_headshot(yaml.getString("sound_headshot", ""));
 
             gunMap.put(gun.getName().toLowerCase(), gun);
             Piegun.log("Weapon Loaded - " + gun.getName());

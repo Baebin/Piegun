@@ -24,6 +24,14 @@ public class SoundManager {
         playSound(player, gun.getSound_auto_changed());
     }
 
+    public static void playHitSound(Player player, Gun gun) {
+        playSound(player, gun.getSound_hit());
+    }
+
+    public static void playHeadshotSound(Player player, Gun gun) {
+        playSound(player, gun.getSound_headshot());
+    }
+
     private static void playSound(Player player, String sound) {
         player.getWorld().playSound(player.getLocation(), sound, 1, 1);
     }

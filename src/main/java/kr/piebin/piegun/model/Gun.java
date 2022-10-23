@@ -44,6 +44,9 @@ public class Gun {
     String sound_empty;
     String sound_auto_changed;
 
+    String sound_hit;
+    String sound_headshot;
+
     public String getName() {
         return name;
     }
@@ -259,6 +262,24 @@ public class Gun {
 
     public Gun setSound_auto_changed(String sound_auto_changed) {
         this.sound_auto_changed = sound_auto_changed;
+        return this;
+    }
+
+    public String getSound_hit() {
+        return sound_hit;
+    }
+
+    public Gun setSound_hit(String sound_hit) {
+        this.sound_hit = sound_hit;
+        return this;
+    }
+
+    public String getSound_headshot() {
+        return sound_headshot;
+    }
+
+    public Gun setSound_headshot(String sound_headshot) {
+        this.sound_headshot = sound_headshot;
         return this;
     }
 }
