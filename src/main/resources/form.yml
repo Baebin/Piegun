@@ -2,7 +2,7 @@ name: §aTester
 item: Ghast_Tear
 
 damage: 8
-ammo: 10
+ammo: 3
 
 auto: false
 
@@ -24,6 +24,12 @@ model_default: 1000
 model_zoom: 1001
 model_reload:
 - 1002
+
+model_ammo:
+- 3000
+- 3001
+- 3002
+- 3003
 
 zoomEnabled: true
 zoomMotionEnabled: false

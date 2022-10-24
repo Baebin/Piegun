@@ -109,6 +109,7 @@ public class GunUtilManager {
                 .setModel_default(yaml.getInt("model_default", 0))
                 .setModel_zoom(yaml.getInt("model_zoom", 0))
                 .setModel_reload(yaml.getIntegerList("model_reload"))
+                .setModel_ammo(yaml.getIntegerList("model_ammo"))
 
                 .setZoomEnabled(yaml.getBoolean("zoomEnabled", true))
                 .setZoomMotionEnabled(yaml.getBoolean("zoomMotionEnabled", false))

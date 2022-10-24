@@ -33,6 +33,7 @@ public class Gun {
     int model_default;
     int model_zoom;
     List<Integer> model_reload;
+    List<Integer> model_ammo;
 
     // Sniper zoom
     boolean zoomEnabled;
@@ -208,6 +209,16 @@ public class Gun {
 
     public Gun setModel_reload(List<Integer> model_reload) {
         this.model_reload = model_reload;
+        return this;
+    }
+
+    public List<Integer> getModel_ammo() {
+        if (model_ammo == null) return new ArrayList<>();
+        return model_ammo;
+    }
+
+    public Gun setModel_ammo(List<Integer> model_ammo) {
+        this.model_ammo = model_ammo;
         return this;
     }
 
