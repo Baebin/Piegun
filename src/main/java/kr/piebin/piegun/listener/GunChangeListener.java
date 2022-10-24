@@ -1,10 +1,7 @@
 package kr.piebin.piegun.listener;
 
 import kr.piebin.piegun.action.GunZoom;
-import kr.piebin.piegun.manager.GunFireManager;
-import kr.piebin.piegun.manager.GunUtilManager;
-import kr.piebin.piegun.manager.PacketManager;
-import kr.piebin.piegun.manager.PotionManager;
+import kr.piebin.piegun.manager.*;
 import kr.piebin.piegun.model.Gun;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -57,6 +54,8 @@ public class GunChangeListener implements Listener {
 
                 if (item.getType().equals(GunUtilManager.getItem(weapon).getType())) {
                     PacketManager.showActionBar(player, weapon, item);
+                    GunAutoImageManager.change(player, weapon);
+                    GunAmmoImageManager.change(player, weapon, gun);
 
                     PotionManager.addFastDigging(player);
 
