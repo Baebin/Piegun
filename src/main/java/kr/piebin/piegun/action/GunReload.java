@@ -1,10 +1,7 @@
 package kr.piebin.piegun.action;
 
 import kr.piebin.piegun.Piegun;
-import kr.piebin.piegun.manager.GunFireManager;
-import kr.piebin.piegun.manager.GunUtilManager;
-import kr.piebin.piegun.manager.PacketManager;
-import kr.piebin.piegun.manager.SoundManager;
+import kr.piebin.piegun.manager.*;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
 import net.minecraft.server.v1_16_R3.PacketPlayOutSetSlot;
@@ -112,6 +109,7 @@ public class GunReload {
 
                 PacketManager.sendActionBar(player, actionbar);
             }
+
             if ((status=GunFireManager.getStatus(player)).getReloadStatus(weapon)) {
                 //PacketManager.sendPacketPlayOutSetSlot(player, weapon, gun.getModel_default());
                 meta.setCustomModelData(gun.getModel_default());
@@ -122,11 +120,12 @@ public class GunReload {
                 status.setAmmo(weapon, gun.getAmmo());
                 GunFireManager.saveStatus(player, status);
 
+                GunAmmoImageManager.change(player, weapon, gun);
                 PacketManager.sendActionBar(player, actionbar.replaceAll("f", "b"));
             } else {
                 SoundManager.stopReloadSound(player, gun);
-                PacketManager.sendActionBar(player, "");
             }
+            PacketManager.sendActionBar(player, "");
 
             if (player.getItemInHand() != null && player.getItemInHand().getType() != Material.AIR) {
                 if (player.getItemInHand().getType() == item.getType()
