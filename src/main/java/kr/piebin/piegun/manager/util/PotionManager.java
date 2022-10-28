@@ -1,4 +1,4 @@
-package kr.piebin.piegun.manager;
+package kr.piebin.piegun.manager.util;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;

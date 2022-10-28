@@ -4,7 +4,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import kr.piebin.piegun.manager.GunTeamManager;
+import kr.piebin.piegun.manager.util.GunTeamManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 

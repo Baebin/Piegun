@@ -1,4 +1,4 @@
-package kr.piebin.piegun.manager;
+package kr.piebin.piegun.manager.gui;
 
 import kr.piebin.piegun.model.Gun;
 import org.bukkit.Material;

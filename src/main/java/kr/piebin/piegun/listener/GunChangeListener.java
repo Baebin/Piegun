@@ -1,7 +1,11 @@
 package kr.piebin.piegun.listener;
 
 import kr.piebin.piegun.action.GunZoom;
-import kr.piebin.piegun.manager.*;
+import kr.piebin.piegun.manager.gui.GunGUIManager;
+import kr.piebin.piegun.manager.util.PacketManager;
+import kr.piebin.piegun.manager.util.PotionManager;
+import kr.piebin.piegun.manager.weapon.GunFireManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
 import kr.piebin.piegun.model.Gun;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

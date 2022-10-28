@@ -1,5 +1,6 @@
-package kr.piebin.piegun.manager;
+package kr.piebin.piegun.manager.weapon;
 
+import kr.piebin.piegun.manager.util.PotionManager;
 import kr.piebin.piegun.model.GunStatus;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

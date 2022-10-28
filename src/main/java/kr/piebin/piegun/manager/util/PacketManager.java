@@ -1,6 +1,9 @@
-package kr.piebin.piegun.manager;
+package kr.piebin.piegun.manager.util;
 
 import kr.piebin.piegun.Piegun;
+import kr.piebin.piegun.manager.weapon.GunFireManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
+import kr.piebin.piegun.manager.gui.GunGUIManager;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
 import net.md_5.bungee.api.ChatMessageType;
@@ -141,7 +144,7 @@ public class PacketManager {
     public static void showBullet(Player player, String weapon) {
         Gun gun = GunUtilManager.gunMap.get(weapon);
         //GunAmmoImageManager.change(player, weapon, gun);
-        GunGUIManager.sendGUI(player, weapon, gun);
+        GunGUIManager.sendGUI(player, weapon);
         //sendActionBar(player, "§c" + GunFireManager.getStatus(player).getAmmo(weapon) + " / " + gun.getAmmo());
     }
 }

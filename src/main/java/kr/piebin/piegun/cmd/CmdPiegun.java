@@ -1,8 +1,8 @@
 package kr.piebin.piegun.cmd;
 
 import kr.piebin.piegun.Piegun;
-import kr.piebin.piegun.manager.GunFireManager;
-import kr.piebin.piegun.manager.GunUtilManager;
+import kr.piebin.piegun.manager.weapon.GunFireManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
 import kr.piebin.piegun.model.Gun;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,7 +1,7 @@
 package kr.piebin.piegun.listener;
 
 import kr.piebin.piegun.action.GunFire;
-import kr.piebin.piegun.manager.GunUtilManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

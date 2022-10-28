@@ -4,7 +4,7 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import kr.piebin.piegun.manager.GunFireManager;
+import kr.piebin.piegun.manager.weapon.GunFireManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 

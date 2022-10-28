@@ -1,9 +1,8 @@
 package kr.piebin.piegun.action;
 
-import kr.piebin.piegun.manager.GunFireManager;
-import kr.piebin.piegun.manager.GunUtilManager;
-import kr.piebin.piegun.manager.PacketManager;
-import kr.piebin.piegun.manager.PotionManager;
+import kr.piebin.piegun.manager.weapon.GunFireManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
+import kr.piebin.piegun.manager.util.PotionManager;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
 import org.bukkit.Material;

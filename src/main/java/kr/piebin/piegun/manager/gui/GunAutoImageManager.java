@@ -1,4 +1,4 @@
-package kr.piebin.piegun.manager;
+package kr.piebin.piegun.manager.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

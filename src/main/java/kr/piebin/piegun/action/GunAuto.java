@@ -1,6 +1,10 @@
 package kr.piebin.piegun.action;
 
-import kr.piebin.piegun.manager.*;
+import kr.piebin.piegun.manager.gui.GunGUIManager;
+import kr.piebin.piegun.manager.util.PacketManager;
+import kr.piebin.piegun.manager.util.SoundManager;
+import kr.piebin.piegun.manager.weapon.GunFireManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
 import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
 import org.bukkit.Material;
@@ -33,7 +37,8 @@ public class GunAuto {
     }
 
     private static void showMode(Player player, String weapon) {
+        GunGUIManager.sendGUI(player, weapon);
         //GunAutoImageManager.change(player, weapon);
-        PacketManager.sendActionBar(player, "§9Auto: " + GunFireManager.getStatus(player).getAutoStatus(weapon));
+        //PacketManager.sendActionBar(player, "§9Auto: " + GunFireManager.getStatus(player).getAutoStatus(weapon));
     }
 }

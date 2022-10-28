@@ -1,6 +1,6 @@
 package kr.piebin.piegun.model;
 
-import kr.piebin.piegun.manager.GunUtilManager;
+import kr.piebin.piegun.manager.weapon.GunUtilManager;
 
 import java.util.HashMap;
 import java.util.Map;

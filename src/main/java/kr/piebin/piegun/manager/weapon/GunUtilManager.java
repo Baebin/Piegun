@@ -1,4 +1,4 @@
-package kr.piebin.piegun.manager;
+package kr.piebin.piegun.manager.weapon;
 
 import kr.piebin.piegun.Piegun;
 import kr.piebin.piegun.database.ConfigManager;
