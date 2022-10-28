@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation 'com.github.SkriptLang:Skript:2.5.3'
 
-    compileOnly fileTree('D:\\Programming\\Java\\Plugin\\Bukkit\\spigot-1.16.5.jar')
+    compileOnly fileTree('F:\\Programming\\Java\\Plugin\\Bukkit\\spigot-1.16.5.jar')
 }
 
 def targetJavaVersion = 8
@@ -44,5 +44,5 @@ processResources {
 compileJava.options.encoding = 'UTF-8'
 task copyJar(type: Copy) {
     from jar
-    into 'D:\\Game\\Minecraft\\Bucket\\Dev_86\\plugins'
+    into 'F:\\Minecraft\\Bucket\\Dev_86\\plugins'
 }
