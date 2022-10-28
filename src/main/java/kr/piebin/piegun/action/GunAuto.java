@@ -33,7 +33,7 @@ public class GunAuto {
     }
 
     private static void showMode(Player player, String weapon) {
-        GunAutoImageManager.change(player, weapon);
-        //PacketManager.sendActionBar(player, "§9Auto: " + GunFireManager.getStatus(player).getAutoStatus(weapon));
+        //GunAutoImageManager.change(player, weapon);
+        PacketManager.sendActionBar(player, "§9Auto: " + GunFireManager.getStatus(player).getAutoStatus(weapon));
     }
 }

@@ -54,8 +54,9 @@ public class GunChangeListener implements Listener {
 
                 if (item.getType().equals(GunUtilManager.getItem(weapon).getType())) {
                     PacketManager.showActionBar(player, weapon, item);
-                    GunAutoImageManager.change(player, weapon);
-                    GunAmmoImageManager.change(player, weapon, gun);
+                    GunGUIManager.sendGUI(player, weapon, gun);
+                    //GunAutoImageManager.change(player, weapon);
+                    //GunAmmoImageManager.change(player, weapon, gun);
 
                     PotionManager.addFastDigging(player);
 

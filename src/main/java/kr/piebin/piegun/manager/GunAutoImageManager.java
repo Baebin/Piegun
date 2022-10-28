@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class GunAutoImageManager {
+    /*
     private static final int slot = 7;
 
     private static final int model_auto = 1;
@@ -33,4 +34,5 @@ public class GunAutoImageManager {
 
         player.getInventory().setItem(slot, item);
     }
+     */
 }

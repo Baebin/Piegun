@@ -140,7 +140,8 @@ public class PacketManager {
 
     public static void showBullet(Player player, String weapon) {
         Gun gun = GunUtilManager.gunMap.get(weapon);
-        GunAmmoImageManager.change(player, weapon, gun);
+        //GunAmmoImageManager.change(player, weapon, gun);
+        GunGUIManager.sendGUI(player, weapon, gun);
         //sendActionBar(player, "§c" + GunFireManager.getStatus(player).getAmmo(weapon) + " / " + gun.getAmmo());
     }
 }

@@ -120,7 +120,8 @@ public class GunReload {
                 status.setAmmo(weapon, gun.getAmmo());
                 GunFireManager.saveStatus(player, status);
 
-                GunAmmoImageManager.change(player, weapon, gun);
+                GunGUIManager.sendGUI(player, weapon, gun);
+                //GunAmmoImageManager.change(player, weapon, gun);
                 PacketManager.sendActionBar(player, actionbar.replaceAll("f", "b"));
             } else {
                 SoundManager.stopReloadSound(player, gun);
