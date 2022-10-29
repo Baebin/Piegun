@@ -122,7 +122,6 @@ public class GunReload {
                 //PacketManager.sendPacketPlayOutSetSlot(player, weapon, gun.getModel_default());
                 meta.setCustomModelData(gun.getModel_default());
                 item.setItemMeta(meta);
-                player.setItemInHand(item);
 
                 status.setReloadStatus(weapon, false);
                 status.setAmmo(weapon, gun.getAmmo());
@@ -141,7 +140,6 @@ public class GunReload {
 
                     meta.setCustomModelData(gun.getModel_default());
                     item.setItemMeta(meta);
-                    player.setItemInHand(item);
                 }
             }
 

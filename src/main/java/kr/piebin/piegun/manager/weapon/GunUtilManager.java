@@ -104,10 +104,11 @@ public class GunUtilManager {
                 .setRx(Float.parseFloat(yaml.getString("rx", "0")))
                 .setRy(Float.parseFloat(yaml.getString("ry", "0")))
 
-                .setParticle(yaml.getString("particle", "CRIT_MAGIC"))
+                .setParticle(yaml.getString("particle", ""))
 
                 .setModel_default(yaml.getInt("model_default", 0))
                 .setModel_zoom(yaml.getInt("model_zoom", 0))
+                .setModel_zoom_fire(yaml.getInt("model_zoom_fire", 0))
                 .setModel_reload(yaml.getIntegerList("model_reload"))
                 //.setModel_ammo(yaml.getIntegerList("model_ammo"))
 

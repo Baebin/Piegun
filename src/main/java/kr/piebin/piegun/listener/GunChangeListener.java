@@ -23,7 +23,7 @@ public class GunChangeListener implements Listener {
         ItemStack item_pre = player.getInventory().getItem(event.getPreviousSlot());
 
         PotionManager.removeSlow(player);
-        PotionManager.removeFastDigging(player);
+        PotionManager.removeDigging(player);
 
         ItemStack item_helmet = player.getInventory().getHelmet();
         if (item_helmet != null && item_helmet.getType() != Material.AIR) {
@@ -62,7 +62,7 @@ public class GunChangeListener implements Listener {
                     //GunAutoImageManager.change(player, weapon);
                     //GunAmmoImageManager.change(player, weapon, gun);
 
-                    PotionManager.addFastDigging(player);
+                    PotionManager.addDigging(player);
 
                     if (item.getAmount() > 1) {
                         item.setAmount(1);

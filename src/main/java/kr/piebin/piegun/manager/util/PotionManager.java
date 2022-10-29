@@ -20,10 +20,29 @@ public class PotionManager {
     }
 
     public static void addFastDigging(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, POTION_TIME, 51));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, POTION_TIME, 10));
     }
+
 
     public static void removeFastDigging(Player player) {
         player.removePotionEffect(PotionEffectType.FAST_DIGGING);
+    }
+
+    public static void addSlowDigging(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, POTION_TIME, 10));
+    }
+
+    public static void removeSlowDigging(Player player) {
+        player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+    }
+
+    public static void addDigging(Player player) {
+        addFastDigging(player);
+        addSlowDigging(player);
+    }
+
+    public static void removeDigging(Player player) {
+        removeFastDigging(player);
+        removeSlowDigging(player);
     }
 }

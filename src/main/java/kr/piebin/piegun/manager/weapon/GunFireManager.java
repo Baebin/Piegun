@@ -36,7 +36,7 @@ public class GunFireManager {
         }
 
         PotionManager.removeSlow(player);
-        PotionManager.removeFastDigging(player);
+        PotionManager.removeDigging(player);
     }
 
     public static void checkAndInit(Player player) {

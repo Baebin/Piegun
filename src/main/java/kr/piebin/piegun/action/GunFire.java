@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -110,6 +111,10 @@ public class GunFire {
                     }
 
                     if (ammo == 0) SoundManager.playEmptySound(player, gun);
+                    else {
+                        showDust();
+                        model_init();
+                    }
 
                     GunFireManager.saveStatus(player, status);
 
@@ -158,6 +163,8 @@ public class GunFire {
     }
 
     private void fireProjectileSpread(Location location) {
+        model_init();
+
         if (spread > 1) {
             float yaw;
             float pitch;
@@ -256,6 +263,8 @@ public class GunFire {
     }
 
     private void damage(LivingEntity e, boolean isHeadshot) {
+        PacketManager.sendPacketPlayOutEntityStatus(player, e);
+
         double health = e.getHealth() - damage;
         if (isHeadshot) {
             health -= damage;
@@ -299,5 +308,49 @@ public class GunFire {
         PacketManager.sendPacketPlayOutPosition(player, yaw_rebound, pitch_rebound);
 
         return location;
+    }
+
+    private void showDust() {
+        Vector vector = player.getLocation().getDirection();
+        Location location = player.getEyeLocation();
+
+        Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            double weight_x = (random.nextInt(300)+100)/100;
+            double weight_y = (random.nextInt(300)+100)/100;
+            double weight_z = (random.nextInt(300)+100)/100;
+
+            double x = vector.getX() * weight_x;
+            double y = vector.getY() * weight_y;
+            double z = vector.getZ() * weight_z;
+
+            PacketManager.spawnParticleDust(player,
+                    new Location(player.getWorld(), location.getX()+x, location.getY()+y, location.getZ()+z, 0, 0));
+        }
+    }
+
+    private void model_init() {
+        Bukkit.getScheduler().runTaskAsynchronously(Piegun.getInstance(), () -> {
+            if (!status.getZoomStatus(weapon)) return;
+
+            int model_zoom = gun.getModel_zoom();
+            int model_zoom_fire = gun.getModel_zoom_fire();
+
+            ItemMeta meta = item.getItemMeta();
+            meta.setCustomModelData(model_zoom_fire);
+            item.setItemMeta(meta);
+
+            try {
+                int delay = gun.getDelay_fire();
+                if (delay > 30) delay = 30;
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            meta.setCustomModelData(model_zoom);
+            item.setItemMeta(meta);
+        });
     }
 }

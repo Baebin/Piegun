@@ -32,8 +32,10 @@ public class Gun {
     // Resource
     int model_default;
     int model_zoom;
+    int model_zoom_fire;
     List<Integer> model_reload;
     //List<Integer> model_ammo;
+
 
     // Sniper zoom
     boolean zoomEnabled;
@@ -199,6 +201,16 @@ public class Gun {
     public Gun setModel_zoom(int model_zoom) {
         if (model_zoom < 0) model_zoom = 0;
         this.model_zoom = model_zoom;
+        return this;
+    }
+
+    public int getModel_zoom_fire() {
+        return model_zoom_fire;
+    }
+
+    public Gun setModel_zoom_fire(int model_zoom_fire) {
+        if (model_zoom_fire < 0) model_zoom_fire = 0;
+        this.model_zoom_fire = model_zoom_fire;
         return this;
     }
 

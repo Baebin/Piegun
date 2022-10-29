@@ -8,15 +8,17 @@ import kr.piebin.piegun.model.Gun;
 import kr.piebin.piegun.model.GunStatus;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_16_R3.PacketPlayOutPosition;
-import net.minecraft.server.v1_16_R3.PacketPlayOutSetSlot;
+import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -30,7 +32,7 @@ public class PacketManager {
     public static final int RELOAD_ACTIONBAR = 10;
     public static final String[] BLOCKS_PASSABLE = {
             "pot", "web", "bush", "lava", "rale", "sign", "step", "water",
-            "diode", "glass", "leave", "lever", "plant", "plate", "sugar", "torch",
+            "diode", "glass", "leave", "lever", "plant", "plate", "poppy", "sugar", "torch",
             "button", "carpet", "flower", "ladder",
             "redstone", "sapling", "mushroom",
             "dandelion", "trap_door", "tall_grass"
@@ -54,6 +56,11 @@ public class PacketManager {
         if (material.isSolid()) return false;
 
         return false;
+    }
+
+    public static void sendPacketPlayOutEntityStatus(Player player, LivingEntity entity) {
+        PacketPlayOutEntityStatus packet = new PacketPlayOutEntityStatus(((CraftLivingEntity)entity).getHandle(), (byte) 2);
+        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
     }
 
     public static void sendPacketPlayOutSetSlot(Player player, ItemStack item) {
@@ -85,8 +92,26 @@ public class PacketManager {
     }
 
     public static void spawnParticle(Location location, String particle) {
+        if (particle.equals("")) return;
         location.getWorld().spawnParticle(
                 Particle.valueOf(particle), location.getX(), location.getY(), location.getZ(), 1, 0, 0, 0, 0, null);
+    }
+
+    public static void spawnParticleDust(Player player, Location location) {
+        // new PacketPlayOutWorldParticles(
+        // EnumParticle type, boolean force, float locX, float locY, float locZ, float offX, float offY, float offZ, float speed, int amount, [data])
+
+        PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(
+                Particles.SMOKE, false,
+                location.getX(), location.getY(), location.getZ(),
+                0, 0, 0,
+                0, 1
+        );
+
+        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+
+        //location.getWorld().spawnParticle(
+        //        Particle.SMOKE_NORMAL, location.getX(), location.getY(), location.getZ(), 1, 0, 0.01, 0, 0.01, null);
     }
 
     public static void sendActionBar(Player player, String message) {
